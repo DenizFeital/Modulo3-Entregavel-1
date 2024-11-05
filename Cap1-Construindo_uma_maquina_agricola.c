@@ -6,7 +6,7 @@ int ledazul = 18;
 int buttonPin1 = 2;
 int buttonPin2 = 15;
 int dhtPin = 4;
-int photoresistorPin = 34;  // define the pin for the photoresistor
+int photoresistorPin = 34; 
 
 #define DHTTYPE DHT22
 DHT dht(dhtPin, DHTTYPE);
@@ -18,7 +18,7 @@ void setup() {
     pinMode(ledazul, OUTPUT);
     pinMode(buttonPin1, INPUT_PULLUP);
     pinMode(buttonPin2, INPUT_PULLUP);
-    pinMode(photoresistorPin, INPUT); // setup the photoresistor pin
+    pinMode(photoresistorPin, INPUT); 
     Serial.begin(9600);
     Serial.println("todos os leds estao apagados, inicializando!");
     dht.begin();
@@ -31,17 +31,17 @@ void loop() {
     if (buttonState1 == LOW) {
         digitalWrite(ledverde, HIGH);
         Serial.println("LED verde está aceso");
+        Serial.println("Nutriente Fósforo coletado!");
     } else {
         digitalWrite(ledverde, LOW);
-        Serial.println("LED verde está apagado");
     }
 
     if (buttonState2 == LOW) {
         digitalWrite(ledazul, HIGH);
         Serial.println("LED azul está aceso");
+        Serial.println("Nutriente Potássio coletado!");
     } else {
         digitalWrite(ledazul, LOW);
-        Serial.println("LED azul está apagado");
     }
 
     if (isnan(humidity)) {
@@ -54,13 +54,14 @@ void loop() {
 
     // Ler o valor do fotoresistor e converter para porcentagem de nível de luz
     int lightLevelRaw = analogRead(photoresistorPin);
-    float lightLevelPercentage = map(lightLevelRaw, 0, 4095, 0, 100); // Formula para converter em percentual
+    float lightLevelPercentage = map(lightLevelRaw, 0, 4095, 0, 100); 
 
-    Serial.print("Nível de luz (Fotoresistor) em bruto: ");
-    Serial.print(lightLevelRaw);
-    Serial.print(" | Nível de luz em porcentagem: ");
-    Serial.print(lightLevelPercentage);
-    Serial.println("%");
+    // Converter o nível de luz para uma escala de 0 a 14,
+    // considerando os dados analógicos coletados, fazendo uma relação com o pH
+    // que varia de 0 a 14
+    float lightLevelOutOf14 = lightLevelPercentage * 14 / 100;
+    Serial.print("Nível de luz (no caso, pH) em uma escala de 0 a 14: ");
+    Serial.println(lightLevelOutOf14);
 
-    delay(2000);
+    delay(3000);
 }
