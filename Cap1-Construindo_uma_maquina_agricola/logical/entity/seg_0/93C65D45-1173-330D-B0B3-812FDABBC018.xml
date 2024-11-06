@@ -1,0 +1,97 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="93C65D45-1173-330D-B0B3-812FDABBC018" name="TB_NUTRIENT_COLLECTION">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:10:57 UTC</createdTime>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="collection_id" id="12FA3787-C663-ECE8-347C-1C3589285501">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:11:09 UTC</createdTime>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nutrient_type" id="E7B7E87C-175A-4265-81AB-4FD4E7243376">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:11:36 UTC</createdTime>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="collection_time" id="CBB6AF75-2359-3103-66E7-4037EBEF9EFC">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:12:23 UTC</createdTime>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="quantity_collected" id="903C4493-E3CC-D0EB-893C-467915AF3973">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:12:00 UTC</createdTime>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,3,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="unit" id="5DDC1AEC-D8B9-E2A0-831E-0B0537DF854E">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:22:26 UTC</createdTime>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A9F8E955-464C-679B-30B2-0B31ED59E957" name="TB_NUTRIENT_COLLECTION PK">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:11:23 UTC</createdTime>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>12FA3787-C663-ECE8-347C-1C3589285501</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
