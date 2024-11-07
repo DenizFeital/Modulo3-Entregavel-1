@@ -121,7 +121,6 @@ while conexao:
                 print("Erro ao listar os sensores:", e)
             finally:
                 pass
-                
                     # ALTERAR OS DADOS DE UM REGISTRO
         case 3:
             try:
