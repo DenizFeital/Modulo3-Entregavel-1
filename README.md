@@ -72,7 +72,6 @@ from tabulate import tabulate
 ## Roadmap
 * Desenvolver outros tipos de relatórios.
 
-* 
 <!-- CONTRIBUTING -->
 ## Contribuição:
 
