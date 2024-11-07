@@ -55,7 +55,7 @@ while conexao:
     if escolha.isdigit():
         escolha = int(escolha)
     else:
-        escolha = 6
+        escolha = 8
         print("Digite um número.\nReinicie a Aplicação!")
 
     os.system('cls')  # Limpa a tela via SO
@@ -102,50 +102,36 @@ while conexao:
                 # LISTAR TODOS OS PETS
         case 2:
             try:
-                # Assuming you have an active connection and cursor (conn and inst_cadastro)
                 print("----- LISTAR TODOS OS SENSORES -----\n")
 
-                # SQL query to fetch all records
                 query = "SELECT * FROM TB_MD3_Sensors"
 
-                # Execute the query
                 inst_cadastro.execute(query)
 
-                # Fetch all rows from the query result
                 sensors = inst_cadastro.fetchall()
 
-                # Define table headers
                 headers = ["Sensor ID", "Sensor Type", "Installation Date", "Status", "Sensor Location"]
 
-                # Check if there are any sensors to display
                 if sensors:
-                    # Display the data in a table format using tabulate
                     print(tabulate(sensors, headers=headers, tablefmt="grid"))
                 else:
                     print("No sensors found.")
 
             except Exception as e:
-                # Handle any database connection or SQL errors
                 print("Erro ao listar os sensores:", e)
             finally:
-                # Close the connection if needed (optional)
-                # conn.close()
                 pass
                 
                     # ALTERAR OS DADOS DE UM REGISTRO
         case 3:
             try:
                 print("----- ATUALIZAR SENSOR -----\n")
-                
-                # Recebe o Sensor_ID para localizar o sensor
                 var_sensor_id = int(input("Digite o Sensor ID para atualizar: "))
 
-                # Check if the sensor exists
                 check_query = "SELECT COUNT(*) FROM TB_MD3_Sensors WHERE sensor_id = :sensor_id"
                 inst_cadastro.execute(check_query, {"sensor_id": var_sensor_id})
                 result = inst_cadastro.fetchone()
 
-                # If the count is 0, the sensor does not exist
                 if result[0] == 0:
                     print(f"Sensor ID {var_sensor_id} não encontrado!")
                 else:
@@ -153,8 +139,6 @@ while conexao:
                     var_sensor_type = input("Digite o tipo....: ")
                     var_status = input("Digite o status....: ")
                     var_sensor_location = input("Digite a localização...: ")
-
-                    # Get today's date for the installation date update (if needed)
                     today_date = datetime.today().date()
 
                     # Monta a instrução SQL para atualizar os dados
@@ -224,54 +208,89 @@ while conexao:
             except Exception as e:
                 # Erro de conexão ou SQL
                 print("Erro ao excluir o sensor:", e)
-        
         case 5:
-            print("\n!!!!! EXCLUI TODOS OS DADOS TABELA !!!!!\n")
-            confirma = input(margem + "CONFIRMA A EXCLUSÃO DE TODOS OS PETS? [S]im ou [N]ÃO?")
-            if confirma.upper() == "S":
-                # Apaga todos os registros
-                exclusao = "DELETE FROM petshop"
-                inst_exclusao.execute(exclusao)
-                conn.commit()
+            try:
+                num_records = int(input("Quantos registros quer ver nesta amostragem? "))
 
-                # Depois de excluir todos os registros ele zera o ID
-                data_reset_ids = """ ALTER TABLE petshop MODIFY(ID GENERATED AS IDENTITY (START WITH 1)) """
-                inst_exclusao.execute(data_reset_ids)
-                conn.commit()
+                query = f"""
+                SELECT nutrient_type, collection_value
+                FROM tb_md3_nutrient_collection
+                FETCH FIRST {num_records} ROWS ONLY
+                """
+                inst_cadastro = conn.cursor()
+                inst_cadastro.execute(query)
+                records = inst_cadastro.fetchall()
 
-                print("##### Todos os registros foram excluídos! #####")
-            else:
-                print(margem + "Operação cancelada pelo usuário!")
+                if records:
+                    print(f"\nDisplaying {num_records} record(s) from tb_md3_nutrient_collection:")
 
-        # SAI DA APLICAÇÃO
+                    print(f"{'Tipo do nutriente':<20}{'Valor coletado':<15}")  
+
+                    for row in records:
+                        print(f"{row[0]:<20}{row[1]:<15}") 
+                else:
+                    print(f"No records found in the table tb_md3_nutrient_collection.")
+            
+            except Exception as e:
+                print("Error:", e)
         case 6:
-            # Modificando o flag da conexão
-            conexao = False
+            try:
+                num_records = int(input("Quantos registros quer ver nesta amostragem? "))
+                query = f"""
+                SELECT tb_sensors_sensor_id, humidity_value, TO_CHAR(reading_timestamp, 'YYYY-MM-DD HH24:MI:SS')
+                FROM tb_md3_humidity_readings
+                FETCH FIRST {num_records} ROWS ONLY
+                """
+                inst_cadastro = conn.cursor()
+                inst_cadastro.execute(query)
+                records = inst_cadastro.fetchall()
 
-        # CASO O NUMERO DIGITADO NÃO SEJA UM DO MENU
-        
+                if records:
+                    print(f"\nDisplaying {num_records} record(s) from tb_md3_humidity_readings:")
+                    print(f"{'Sensor ID':<15}{'Humidade':<15}{'Horário de leitura':<25}")
+
+                    for row in records:
+                        print(f"{row[0]:<15}{row[1]:<15}{row[2]:<25}") 
+                else:
+                    print(f"No records found in the table tb_md3_humidity_readings.")
+            
+            except Exception as e:
+                print("Error:", e)
+
         case 7:
-            # Modificando o flag da conexão
-            conexao = False
+            try:
+                num_records = int(input("Quantos registros quer ver nesta amostragem? "))
 
-        # CASO O NUMERO DIGITADO NÃO SEJA UM DO MENU
-        
+                query = f"""
+                SELECT tb_sensors_sensor_id, TO_CHAR(irrigation_time, 'YYYY-MM-DD HH24:MI:SS'), duration
+                FROM tb_md3_irrigation_events
+                FETCH FIRST {num_records} ROWS ONLY
+                """
+                inst_cadastro = conn.cursor()
+                inst_cadastro.execute(query)
+                records = inst_cadastro.fetchall()
+                if records:
+                    print(f"\nDisplaying {num_records} record(s) from tb_md3_irrigation_events:")
+
+                    print(f"{'Sensor ID':<15}{'Hora da irrigação':<25}{'Duracao em minutos':<20}")
+
+                    for row in records:
+                        duration_value = row[2] if row[2] else 'N/A' 
+                        print(f"{row[0]:<15}{row[1]:<25}{duration_value:<20}") 
+                else:
+                    print(f"No records found in the table tb_md3_irrigation_events.")
+            
+            except Exception as e:
+                print("Error:", e)
+
+            # SAI DA APLICAÇÃO
         case 8:
-            # Modificando o flag da conexão
+            
             conexao = False
 
-        # CASO O NUMERO DIGITADO NÃO SEJA UM DO MENU
-        
-        
-        case 9:
-            # Modificando o flag da conexão
-            conexao = False
-
-        # CASO O NUMERO DIGITADO NÃO SEJA UM DO MENU
         case _:
-            input(margem + "Digite um número entre 1 e 9.")
+            input(margem + "Digite um número entre 1 e 8.")
 
-    # Pausa o fluxo da aplicação para a leitura das informações
     input(margem + "Pressione ENTER")
 else:
     print("Obrigado por utilizar a nossa aplicação! :)")
