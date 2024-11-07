@@ -7,16 +7,21 @@ int buttonPin1 = 2;
 int buttonPin2 = 15;
 int dhtPin = 4;
 int photoresistorPin = 34;
-int relayPin = 5;  // Pino para o relay
+int relayPin = 5; 
 
 #define DHTTYPE DHT22
 DHT dht(dhtPin, DHTTYPE);
 
-
 // Colocando um valor aleatório para humidade//
 float humidity = 32.0;
-int buttonPressCount = 0; // Contador de pressionamentos do botão
-bool lastButtonState2 = HIGH; // Último estado do botão 2
+
+// Contador de pressionamentos do botão
+int buttonPressCount = 0; 
+bool lastButtonState2 = HIGH; 
+
+// Variáveis para o temporizador
+unsigned long relayOnTime = 0;  // Armazena o tempo quando o relé foi ligado
+unsigned long relayTimeout = 60000;  // 60 segundos = 1 minuto em milissegundos
 
 void setup() {
     pinMode(ledverde, OUTPUT);
@@ -24,21 +29,29 @@ void setup() {
     pinMode(buttonPin1, INPUT_PULLUP);
     pinMode(buttonPin2, INPUT_PULLUP);
     pinMode(photoresistorPin, INPUT);
-    pinMode(relayPin, OUTPUT);   // Configura o pino do relé como saída
-    digitalWrite(relayPin, LOW); // Garante que o relé começa desligado
+    pinMode(relayPin, OUTPUT);
+    digitalWrite(relayPin, LOW); 
     Serial.begin(9600);
     Serial.println("todos os leds estao apagados, inicializando!");
     dht.begin();
 }
 
 void loop() {
+// Check and print the status of the relay
+if (digitalRead(relayPin) == HIGH) {
+    Serial.println("Relay is ON");
+} else {
+    Serial.println("Relay is OFF");
+}
+
+
+
     int buttonState1 = digitalRead(buttonPin1);
     int buttonState2 = digitalRead(buttonPin2);
 
     if (buttonState1 == LOW) {
         digitalWrite(ledverde, HIGH);
-        Serial.println("LED verde está aceso");
-        Serial.println("Nutriente Fósforo coletado!");
+        Serial.println("LED verde está aceso! Nutriente Fósforo coletado");
     } else {
         digitalWrite(ledverde, LOW);
     }
@@ -49,13 +62,6 @@ void loop() {
         Serial.print(buttonPressCount);
         Serial.println(" vezes.");
         
-
-        ////////////////////////////////////////////////////////////////////////////////////////
-        // Aqui foi criada a regra para saber se é hora de irrigar                            //
-        // Considerar se o botão foi pressionado 3 vezes e se o nível de luz é maior do que 2 //
-        ////////////////////////////////////////////////////////////////////////////////////////
-
-
         // Verifica se o botão foi pressionado 3 vezes
         if (buttonPressCount >= 3) {
             // Ler o valor do fotoresistor e converter para porcentagem de nível de luz
@@ -64,9 +70,13 @@ void loop() {
             float lightLevelOutOf14 = lightLevelPercentage * 14 / 100;
 
             // Verifica se o nível de luz é superior a 2
-                        if (lightLevelOutOf14 > 2) {
+            if (lightLevelOutOf14 > 2) {
+                Serial.println("-------------------------------------------------------");
                 Serial.println("Está na hora de irrigar. Processo de irrigação ativado!");
+                Serial.println("-------------------------------------------------------");
                 digitalWrite(relayPin, HIGH);  // Liga o relay
+                relayOnTime = millis();  // Salva o tempo em que o relay foi ligado
+                buttonPressCount = 0;
             } else {
                 Serial.println("Ainda não é hora de irrigar.");
             }
@@ -75,8 +85,15 @@ void loop() {
 
     digitalWrite(ledazul, buttonState2 == LOW ? HIGH : LOW);
     if (buttonState2 == LOW) {
-        Serial.println("LED azul está aceso");
-        Serial.println("Nutriente Potássio coletado!");
+        Serial.println("LED azul está aceso, nutriente Potássio coletado!");
+    }
+
+    // Verifica se já passou o tempo de 300 segundos para desligar o relé
+    if (digitalRead(relayPin) == HIGH) {
+        if (millis() - relayOnTime >= relayTimeout) {
+            digitalWrite(relayPin, LOW);  // Desliga o relay após 300 segundos
+            Serial.println("Relé desligado após 300 segundos.");
+        }
     }
 
     // Ler o valor do fotoresistor e converter para porcentagem de nível de luz
@@ -94,6 +111,7 @@ void loop() {
         Serial.print("A medição da humidade está em: ");
         Serial.print(humidity);
         Serial.println(" %, desde a última medição");
+        
     }
 
     lastButtonState2 = buttonState2;
