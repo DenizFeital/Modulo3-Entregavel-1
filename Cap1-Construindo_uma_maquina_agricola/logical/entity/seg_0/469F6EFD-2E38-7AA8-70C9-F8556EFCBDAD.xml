@@ -27,6 +27,20 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="sensor_id" id="94DBBB4B-198E-137D-2B52-5F23763903AF">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:32:25 UTC</createdTime>
+<generatorID>AEA1DDB9-C18E-EE62-4280-B9DB1C2EB6DA</generatorID>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<referedAttribute>CCBF1BBD-815F-637E-8487-5C76BCF1FA0F</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 <Attribute name="calibration_time" id="A78FF5DA-873C-F8AB-D699-77E632AC840A">
 <createdBy>denizf</createdBy>
 <createdTime>2024-11-06 12:27:07 UTC</createdTime>
@@ -77,6 +91,7 @@
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>B6D00802-5EED-27BE-A917-457D9CFDA610</attributeRef>
+<attributeRef>94DBBB4B-198E-137D-2B52-5F23763903AF</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

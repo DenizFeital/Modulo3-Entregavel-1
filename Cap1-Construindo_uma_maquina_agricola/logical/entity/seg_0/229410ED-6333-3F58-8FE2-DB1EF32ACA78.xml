@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="229410ED-6333-3F58-8FE2-DB1EF32ACA78" name="TB_IRRIGATION_EVENTS">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="229410ED-6333-3F58-8FE2-DB1EF32ACA78" name="TB_MD3_IRRIGATION_EVENTS">
 <createdBy>denizf</createdBy>
 <createdTime>2024-11-06 12:23:02 UTC</createdTime>
 <ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
@@ -22,6 +22,20 @@
 <engineerTo>
 <item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
 </engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="sensor_id" id="743B5705-E3DA-218E-BD96-BE89901CE0DD">
+<createdBy>denizf</createdBy>
+<createdTime>2024-11-06 12:32:15 UTC</createdTime>
+<generatorID>ED3612D5-CFE1-A54B-68C4-80CAC1AD687B</generatorID>
+<ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<engineerTo>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+</engineerTo>
+<referedAttribute>CCBF1BBD-815F-637E-8487-5C76BCF1FA0F</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -62,7 +76,7 @@
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT026</logicalDatatype>
+<logicalDatatype>LOGDT021</logicalDatatype>
 <dataTypePrecision>12</dataTypePrecision>
 <dataTypeScale>3</dataTypeScale>
 <ownDataTypeParameters>,12,3</ownDataTypeParameters>
@@ -73,12 +87,14 @@
 <createdBy>denizf</createdBy>
 <createdTime>2024-11-06 12:23:25 UTC</createdTime>
 <ownerDesignName>Cap1-Construindo_uma_maquina_agricola</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="true"/>
+<item key="22457076-E037-4439-5EBE-99ED563F0CE0" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>E9837598-7F6A-3B43-BB36-D37BBFB76F05</attributeRef>
+<attributeRef>743B5705-E3DA-218E-BD96-BE89901CE0DD</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
