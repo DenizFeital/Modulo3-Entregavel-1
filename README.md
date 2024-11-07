@@ -77,6 +77,4 @@ from tabulate import tabulate
 ## Contribuição:
 
 
-### Top contributors:
-
 Deniz Feital Armanhe - <img width="35" alt="image" src="https://github.com/user-attachments/assets/96a043d2-fe26-459e-96aa-577c929759be">
