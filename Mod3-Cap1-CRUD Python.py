@@ -31,7 +31,7 @@ while conexao:
     os.system('cls')
 
     # Apresenta o menu
-    print("------- CRUD - TRABALHADORES RURAIS -------")
+    print("------- Farm Tech Solutions - Manutenção do ambiente -------")
     print("""
     Para a manutenção dos sensores tempos as seguintes opções:      
     1 - Cadastrar Sensor
