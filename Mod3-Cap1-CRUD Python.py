@@ -101,15 +101,14 @@ while conexao:
 
                 # LISTAR TODOS OS PETS
         case 2:
+            
             try:
                 print("----- LISTAR TODOS OS SENSORES -----\n")
 
-                query = "SELECT * FROM TB_MD3_Sensors"
-
+                num_records = int(input("Quantos registros quer ver nesta amostragem? "))
+                query = f"SELECT * FROM TB_MD3_Sensors FETCH FIRST {num_records} ROWS ONLY"
                 inst_cadastro.execute(query)
-
                 sensors = inst_cadastro.fetchall()
-
                 headers = ["Sensor ID", "Sensor Type", "Installation Date", "Status", "Sensor Location"]
 
                 if sensors:
@@ -121,7 +120,6 @@ while conexao:
                 print("Erro ao listar os sensores:", e)
             finally:
                 pass
-
                     # ALTERAR OS DADOS DE UM REGISTRO
         case 3:
             try:
