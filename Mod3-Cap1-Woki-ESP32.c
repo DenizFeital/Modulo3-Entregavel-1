@@ -21,7 +21,7 @@ bool lastButtonState2 = HIGH;
 
 // Variáveis para o temporizador
 unsigned long relayOnTime = 0;  // Armazena o tempo quando o relé foi ligado
-unsigned long relayTimeout = 60000;  // 60 segundos = 1 minuto em milissegundos
+unsigned long relayTimeout = 30000;  // 60 segundos = 1 minuto em milissegundos
 
 void setup() {
     pinMode(ledverde, OUTPUT);
@@ -92,7 +92,7 @@ if (digitalRead(relayPin) == HIGH) {
     if (digitalRead(relayPin) == HIGH) {
         if (millis() - relayOnTime >= relayTimeout) {
             digitalWrite(relayPin, LOW);  // Desliga o relay após 300 segundos
-            Serial.println("Relé desligado após 300 segundos.");
+            Serial.println("Relé desligado após 30 segundos.");
         }
     }
 
