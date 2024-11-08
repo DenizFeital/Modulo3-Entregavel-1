@@ -17,8 +17,8 @@ As ferramentas utilizadas para este engajamento foram:
 
 
 
-<!-- Iniciando -->
-## Iniciando
+<!-- Visão Geral -->
+## Visão Geral
 
 ### Requisitos
 
@@ -34,8 +34,8 @@ As ferramentas utilizadas para este engajamento foram:
 <img width="598" alt="image" src="https://github.com/user-attachments/assets/099e4a5b-0e8c-4088-80cb-3f10b015de6e">
 
 
-* Armazenar todas as informações dos sensores em base de dados
-    A base de dados escolhida foi o Oracle
+* Armazenar todas as informações dos sensores em base de dados.
+A base de dados escolhida foi o Oracle.
 <img width="260" alt="image" src="https://github.com/user-attachments/assets/5cd13428-b9b2-4255-9463-dc7ba387b381">
 
 ### Bases de Dados
@@ -58,22 +58,27 @@ O manuseio das informações na base de dados é feito através de uma solução
 
 Esta solução possui o seguinte menu de opções:
 
-<img width="368" alt="image" src="https://github.com/user-attachments/assets/cf28715d-887b-43b1-963b-3c0e45a6f259">
+<img width="365" alt="image" src="https://github.com/user-attachments/assets/8088039d-7c55-429b-a5ac-0bfedb3cfa9b">
 
 
 Bibliotecas adicionais para o código Python:
-import os
-import oracledb
-import pandas as pd
-from datetime import datetime
-from tabulate import tabulate
+
+* import os
+
+* import oracledb
+
+* import pandas as pd
+
+* from datetime import datetime
+
+* from tabulate import tabulate
 
 <!-- ROADMAP -->
 ## Roadmap
 * Desenvolver outros tipos de relatórios.
 
-<!-- CONTRIBUTING -->
-## Contribuição:
+<!-- CRIATION -->
+## Criação:
 
 
-Deniz Feital Armanhe - <img width="35" alt="image" src="https://github.com/user-attachments/assets/96a043d2-fe26-459e-96aa-577c929759be">
+Deniz Feital Armanhe (RM559439)- <img width="35" alt="image" src="https://github.com/user-attachments/assets/96a043d2-fe26-459e-96aa-577c929759be">
