@@ -25,7 +25,7 @@ else:
     conexao = True 
 margem = ' ' * 4 # Define uma margem para a exibição da aplicação
 
-# Enquanto o flag conexao estiver apontado com True
+# Enquanto o flag conexao estiver como True
 while conexao:
     # Limpa a tela via SO
     os.system('cls')
@@ -33,18 +33,21 @@ while conexao:
     # Apresenta o menu
     print("------- Farm Tech Solutions - Manutenção do ambiente -------")
     print("""
-    Para a manutenção dos sensores tempos as seguintes opções:      
+    Para a manutenção dos sensores:  
+        
     1 - Cadastrar Sensor
     2 - Listar Sensor
     3 - Alterar Sensor
     4 - Excluir Sensor
     
-    Para consultas gerais temos:
+    Para consultas gerais:
+    
     5 - Consultar Solo
     6 - Consultar Humidade
     7 - Consultar Irrigacao
     
     Para sair do sistema:
+    
     8 - Sair
     """)
 
@@ -91,7 +94,7 @@ while conexao:
 
             except ValueError:
                 # Handle non-numeric input where numeric is expected
-                print("Digite um número na idade!")
+                print("Digite um número válido!")
             except Exception as e:
                 # Handle any database connection or SQL errors
                 print("Erro na transação do BD:", e)
@@ -103,7 +106,7 @@ while conexao:
         case 2:
             
             try:
-                print("----- LISTAR TODOS OS SENSORES -----\n")
+                print("----- LISTAR OS SENSORES -----\n")
 
                 num_records = int(input("Quantos registros quer ver nesta amostragem? "))
                 query = f"SELECT * FROM TB_MD3_Sensors FETCH FIRST {num_records} ROWS ONLY"
@@ -206,13 +209,15 @@ while conexao:
             except Exception as e:
                 # Erro de conexão ou SQL
                 print("Erro ao excluir o sensor:", e)
+
         case 5:
             try:
                 num_records = int(input("Quantos registros quer ver nesta amostragem? "))
 
                 query = f"""
-                SELECT nutrient_type, collection_value
-                FROM tb_md3_nutrient_collection
+                SELECT n.nutrient_name, c.collection_value
+                FROM tb_md3_nutrient_collection c
+                JOIN tb_md3_nutrients n ON c.nutrient_type = n.nutrient_id
                 FETCH FIRST {num_records} ROWS ONLY
                 """
                 inst_cadastro = conn.cursor()
@@ -220,17 +225,18 @@ while conexao:
                 records = inst_cadastro.fetchall()
 
                 if records:
-                    print(f"\nDisplaying {num_records} record(s) from tb_md3_nutrient_collection:")
-
-                    print(f"{'Tipo do nutriente':<20}{'Valor coletado':<15}")  
-
+                    print(f"\nMostrando {num_records} registros(s) do solo:")
+                    print(" ")
+                    print(f"{'Nutriente':<20}{'Valor coletado':<15}")  
+                    print(" ")
                     for row in records:
                         print(f"{row[0]:<20}{row[1]:<15}") 
                 else:
-                    print(f"No records found in the table tb_md3_nutrient_collection.")
+                    print("Nenhum registro encontrado.")
             
             except Exception as e:
                 print("Error:", e)
+
         case 6:
             try:
                 num_records = int(input("Quantos registros quer ver nesta amostragem? "))
@@ -244,13 +250,14 @@ while conexao:
                 records = inst_cadastro.fetchall()
 
                 if records:
-                    print(f"\nDisplaying {num_records} record(s) from tb_md3_humidity_readings:")
+                    print(f"\Mostrando {num_records} recgistro(s) de humidade:")
+                    print(" ")
                     print(f"{'Sensor ID':<15}{'Humidade':<15}{'Horário de leitura':<25}")
-
+                    print(" ")
                     for row in records:
                         print(f"{row[0]:<15}{row[1]:<15}{row[2]:<25}") 
                 else:
-                    print(f"No records found in the table tb_md3_humidity_readings.")
+                    print(f"Nenhum registro encontrado.")
             
             except Exception as e:
                 print("Error:", e)
@@ -268,15 +275,15 @@ while conexao:
                 inst_cadastro.execute(query)
                 records = inst_cadastro.fetchall()
                 if records:
-                    print(f"\nDisplaying {num_records} record(s) from tb_md3_irrigation_events:")
-
+                    print(f"\nMostrando {num_records} registro(s) de irrigação:")
+                    print(" ")
                     print(f"{'Sensor ID':<15}{'Hora da irrigação':<25}{'Duracao em minutos':<20}")
-
+                    print(" ")
                     for row in records:
                         duration_value = row[2] if row[2] else 'N/A' 
                         print(f"{row[0]:<15}{row[1]:<25}{duration_value:<20}") 
                 else:
-                    print(f"No records found in the table tb_md3_irrigation_events.")
+                    print(f"Nenhum registro encontrado.")
             
             except Exception as e:
                 print("Error:", e)
@@ -291,4 +298,6 @@ while conexao:
 
     input(margem + "Pressione ENTER")
 else:
+    print("")
     print("Obrigado por utilizar a nossa aplicação! :)")
+    print("")
