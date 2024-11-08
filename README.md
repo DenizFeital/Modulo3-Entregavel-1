@@ -73,6 +73,17 @@ Bibliotecas adicionais para o código Python:
 
 * from tabulate import tabulate
 
+<!-- Análise de dados -->
+## Análise de dados
+
+Foram criados dois gráficos através da ferramenta R, mostrando algumas informações sobre o ambiente
+
+![image](https://github.com/user-attachments/assets/654ce32a-6f9c-44f3-9b62-15f3d5871ae2)
+
+![image](https://github.com/user-attachments/assets/a35a6226-84c2-4772-8a83-9c2f48ca14f5)
+
+
+
 <!-- ROADMAP -->
 ## Roadmap
 * Desenvolver outros tipos de relatórios.
