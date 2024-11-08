@@ -250,7 +250,7 @@ while conexao:
                 records = inst_cadastro.fetchall()
 
                 if records:
-                    print(f"\Mostrando {num_records} recgistro(s) de humidade:")
+                    print(f"Mostrando {num_records} registro(s) de humidade:")
                     print(" ")
                     print(f"{'Sensor ID':<15}{'Humidade':<15}{'Horário de leitura':<25}")
                     print(" ")
